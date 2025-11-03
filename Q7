@@ -1,0 +1,47 @@
+class Question {
+  String questionText;
+  List<String> options;
+  int correctAnswerIndex;
+
+  Question(this.questionText, this.options, this.correctAnswerIndex);
+}
+
+class Quiz {
+  List<Question> questions;
+  int score = 0;
+
+  Quiz(this.questions);
+
+  void start() {
+    for (var i = 0; i < questions.length; i++) {
+      var q = questions[i];
+      print("\nQ${i + 1}: ${q.questionText}");
+      for (var j = 0; j < q.options.length; j++) {
+        print("${j + 1}. ${q.options[j]}");
+      }
+
+      // For demo, let's simulate user input
+      int userAnswer = q.correctAnswerIndex + 1;
+      print("Your Answer: $userAnswer");
+
+      if (userAnswer - 1 == q.correctAnswerIndex) {
+        print("✅ Correct!");
+        score++;
+      } else {
+        print("❌ Wrong!");
+      }
+    }
+
+    print("\n🎯 Your Final Score: $score / ${questions.length}");
+  }
+}
+
+void main() {
+  List<Question> qList = [
+    Question("What is the capital of Bangladesh?", ["Dhaka", "Chittagong", "Sylhet", "Khulna"], 0),
+    Question("Which language is used for Flutter?", ["Java", "Python", "Dart", "C++"], 2),
+  ];
+
+  Quiz quiz = Quiz(qList);
+  quiz.start();
+}
